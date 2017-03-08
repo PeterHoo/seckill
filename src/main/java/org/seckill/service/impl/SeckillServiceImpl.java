@@ -3,7 +3,7 @@ package org.seckill.service.impl;
 import org.seckill.dao.SecKillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.dto.Exposer;
-import org.seckill.dto.SeckillExcution;
+import org.seckill.dto.SeckillExecution;
 import org.seckill.entity.SecKill;
 import org.seckill.entity.SuccessKilled;
 import org.seckill.enums.SeckillStatusEnum;
@@ -69,7 +69,7 @@ public class SeckillServiceImpl implements SeckillService{
      * 2：保证事务方法的执行时间尽可能短，不要穿插其他网络操作RPC/HTTP请求或者剥离到事务外部
      * 3：不是所有的方法都需要事务，如只有一条修改操作，只读操作不需要事务操作
      */
-    public SeckillExcution excuteSeckill(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {
+    public SeckillExecution excuteSeckill(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {
         if(md5==null||!getMD5(seckillId).equals(md5)){
                 throw new SeckillException("seckill data rewrite");
         }
@@ -90,7 +90,7 @@ public class SeckillServiceImpl implements SeckillService{
                 }else {
                     //秒杀成功
                     SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId,userPhone);
-                    return new SeckillExcution(seckillId, SeckillStatusEnum.SUCCESS,successKilled);
+                    return new SeckillExecution(seckillId, SeckillStatusEnum.SUCCESS,successKilled);
                 }
             }
         }catch (SeckillCloseException e1){

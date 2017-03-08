@@ -3,7 +3,7 @@ package org.seckill.service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.seckill.dto.Exposer;
-import org.seckill.dto.SeckillExcution;
+import org.seckill.dto.SeckillExecution;
 import org.seckill.entity.SecKill;
 import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
@@ -55,9 +55,9 @@ public class SeckillServiceTest {
             long phone = 13644054928L;
             String md5  = exposer.getMd5();
             try {
-                SeckillExcution seckillExcution = seckillService.excuteSeckill(id,phone,md5);
-                logger.info("seckillExcution={}",seckillExcution);
-                //seckillExcution=SeckillExcution{seckillId=1000, status=1, statusInfo='秒杀成功', successKilled=SuccessKilled{seckillId=1000, userPhone=13644054928, status=0, createTime=Mon Feb 27 14:14:17 CST 2017}}
+                SeckillExecution seckillExecution = seckillService.excuteSeckill(id,phone,md5);
+                logger.info("seckillExecution={}",seckillExecution);
+                //seckillExecution=SeckillExecution{seckillId=1000, status=1, statusInfo='秒杀成功', successKilled=SuccessKilled{seckillId=1000, userPhone=13644054928, status=0, createTime=Mon Feb 27 14:14:17 CST 2017}}
             }catch (RepeatKillException e){
                 logger.error(e.getMessage());
             }catch (SeckillCloseException e){
